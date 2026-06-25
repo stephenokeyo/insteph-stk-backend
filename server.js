@@ -119,7 +119,7 @@ app.post('/api/callback', (req, res) => {
     return res.status(200).json({ ResultCode: 0, ResultDesc: "Callback processed successfully." });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
     console.log(`[INSTEPH BACKEND NODE RUNNING ON PORT ${PORT}]`);
     console.log(`Listening for checkout requests arriving from your web interface...`);
