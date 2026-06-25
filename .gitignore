@@ -1,0 +1,7 @@
+node_module/
+.env
+ngrok.exe
+ngrok.zip
+.vscode/
+package-lock.json
+.hintrc

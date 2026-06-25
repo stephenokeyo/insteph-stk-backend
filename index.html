@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTEPH.COM | Purchase Made Easy</title>
+    <style>
+        :root {
+            --primary-dark: #232f3e;
+            --brand-orange: #f96302;
+            --brand-pink-bg: #fde8e8;
+            --brand-pink-accent: #f0425f;
+            --mpesa-green: #10b981;
+            --text-dark: #1a1a1a;
+            --border-muted: #e2e8f0;
+            --sidebar-text: #4a5568;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+        }
+        
+        body { 
+            color: var(--text-dark); 
+            background-color: #f4f6f9; 
+            transition: background-color 0.3s ease;
+        }
+
+        .top-promo-bar {
+            background: linear-gradient(90deg, #e11d48, #f43f5e, #f97316);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        header { 
+            background: #ffffff; 
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-muted);
+        }
+        
+        .logo { 
+            cursor: pointer; 
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 48px; 
+            width: auto;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 550px;
+            margin: 0 40px;
+            display: flex;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--brand-orange);
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            outline: none;
+            font-size: 14px;
+            background: #f8fafc;
+        }
+
+        .search-container button {
+            width: auto;
+            background: var(--brand-orange);
+            color: white;
+            padding: 0 24px;
+            border-radius: 0 8px 8px 0;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        nav a { 
+            color: #4a5568; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 700; 
+            transition: all 0.2s ease; 
+            cursor: pointer; 
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+        
+        nav a:hover, nav a.active { 
+            color: white;
+            background: var(--brand-orange);
+        }
+
+        .header-actions-tray {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle-btn {
+            width: auto;
+            background: #f1f5f9;
+            color: var(--primary-dark);
+            border: 1px solid var(--border-muted);
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+            font-size: 13px;
+        }
+
+        .theme-toggle-btn:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+        .cart-trigger {
+            font-weight: 800;
+            color: var(--text-dark);
+            background: #fff7ed;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #ffedd5;
+        }
+        .cart-trigger:hover {
+            background: #ffedd5;
+        }
+
+        .container { 
+            max-width: 1340px; 
+            margin: 24px auto; 
+            padding: 0 16px; 
+        }
+        
+        .page-section { 
+            display: none; 
+        }
+        
+        .page-section.active { 
+            display: block; 
+        }
+
+        .home-hero-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .category-sidebar {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border-muted);
+            padding: 12px 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            font-size: 14px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .category-item:hover, .category-item.active {
+            background: #fff5f5;
+            color: var(--brand-pink-accent);
+            padding-left: 30px;
+        }
+
+        .hero-banner-slider {
+            background: linear-gradient(135deg, #fff5f5, var(--brand-pink-bg));
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #fecdd3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 50px;
+            min-height: 350px;
+        }
+
+        .hero-text-content {
+            max-width: 55%;
+            z-index: 2;
+        }
+
+        .hero-text-content h1 {
+            font-size: 42px;
+            font-weight: 900;
+            color: #9f1239;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero-text-content p {
+            font-size: 15px;
+            color: #4c0519;
+            margin-bottom: 24px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .hero-image-showcase {
+            position: absolute;
+            right: 4%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38%;
+            height: 88%;
+            background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 0 20px 30px rgba(159,18,57,0.15);
+        }
+
+        .quick-actions-strip {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-muted);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+        }
+
+        .action-badge-node {
+            text-align: center;
+            cursor: pointer;
+            width: 110px;
+        }
+
+        .circle-frame {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #fff7ed;
+            border: 2px solid #ffedd5;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .action-badge-node:hover .circle-frame {
+            transform: translateY(-4px);
+            background: var(--brand-orange);
+            color: white;
+            border-color: var(--brand-orange);
+            box-shadow: 0 10px 15px -3px rgba(249,99,2,0.3);
+        }
+
+        .action-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #4a5568;
+        }
+
+        .flash-sale-container {
+            background: #9f1239;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(159,18,57,0.1);
+        }
+
+        .flash-sale-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 12px;
+        }
+
+        .flash-title {
+            font-size: 22px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffe4e6;
+        }
+
+        .live-timer-countdown {
+            background: var(--brand-pink-accent);
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+            gap: 20px; 
+        }
+        
+        .product-card { 
+            background: white; 
+            border-radius: 10px; 
+            padding: 16px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            border: 1px solid var(--border-muted); 
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            border-color: var(--brand-orange); 
+        }
+
+        .product-card.selected {
+            border: 2px solid var(--mpesa-green);
+            background-color: #f0fdf4; 
+        }
+
+        .trend-badge { position: absolute; top: 12px; right: 12px; background: var(--brand-pink-accent); color: white; padding: 4px 10px; font-size: 11px; font-weight: 800; border-radius: 6px; z-index: 2; }
+        .selected-badge { position: absolute; top: 12px; left: 12px; background: var(--mpesa-green); color: white; padding: 4px 10px; font-size: 11px; font-weight: 800; border-radius: 6px; z-index: 2; }
+        
+        .prod-img-container {
+            width: 100%;
+            height: 190px;
+            margin-bottom: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .prod-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.4s ease;
+        }
+        
+        .product-card:hover .prod-img {
+            transform: scale(1.04);
+        }
+
+        .prod-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .prod-desc { font-size: 12px; color: #64748b; margin-bottom: 12px; line-height: 1.4; height: 34px; overflow: hidden; }
+        .prod-price { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+        .discount-strike { font-size: 12px; color: #a0aec0; text-decoration: line-through; margin-right: 6px; font-weight: 500; }
+        .rating { color: #f59e0b; font-size: 13px; margin-bottom: 12px; }
+
+        button { background: var(--primary-dark); color: white; border: none; padding: 11px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s ease; width: 100%; font-size: 13px; }
+        button:hover { background: #111827; }
+        .btn-accent { background: var(--brand-orange); color: white; }
+        .btn-accent:hover { background: #e05302; }
+        .btn-danger { background: var(--brand-pink-accent); }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-selected-state { background: var(--mpesa-green) !important; cursor: default; }
+
+        .voucher-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+        .voucher-card { background: linear-gradient(135deg, #1e3a8a, #0284c7); color: white; padding: 25px; border-radius: 12px; box-shadow: 0 6px 15px rgba(2, 132, 199, 0.15); }
+        .voucher-card.green { background: linear-gradient(135deg, #064e3b, var(--mpesa-green)); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.15); }
+        .voucher-value { font-size: 32px; font-weight: 900; margin-bottom: 6px; }
+        .voucher-rule { font-size: 13px; opacity: 0.95; font-weight: 500; }
+
+        .checkout-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+        .card-panel { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); border: 1px solid var(--border-muted); margin-bottom: 20px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #f1f5f9; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #4a5568; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid var(--border-muted); border-radius: 8px; font-size: 14px; outline: none; background: #f8fafc; transition: all 0.2s; }
+        input:focus, textarea:focus, select:focus { border-color: var(--brand-orange); background: white; }
+        
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
+        .summary-total { font-size: 19px; font-weight: 800; border-top: 2px dashed var(--border-muted); padding-top: 14px; margin-top: 14px; }
+
+        .admin-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--border-muted); font-size: 13px; }
+        th { background: #f8fafc; font-weight: 700; color: #4a5568; }
+
+        .review-block { margin-top: 12px; padding-top: 10px; border-top: 1px solid #f1f5f9; font-size: 12px; color: #4a5568; }
+        .review-user { font-weight: bold; color: #0284c7; }
+
+        .mpesa-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.65); justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(4px); }
+        .mpesa-box { background: white; padding: 35px; border-radius: 16px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3); }
+        .mpesa-logo { background: var(--mpesa-green); color: white; font-weight: 900; font-size: 22px; padding: 10px 20px; border-radius: 8px; display: inline-block; margin-bottom: 16px; letter-spacing: 0.5px; }
+        .spinner { border: 4px solid #f1f5f9; border-top: 4px solid var(--mpesa-green); border-radius: 50%; width: 48px; height: 48px; animation: spin 0.8s linear infinite; margin: 24px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .admin-lock-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; background: white; border-radius: 12px; border: 1px solid var(--border-muted); max-width: 450px; margin: 40px auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+
+        /* Floating WhatsApp Button Styling */
+        .whatsapp-floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            text-decoration: none;
+            font-size: 30px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .whatsapp-floating-btn:hover {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+        }
+
+        /* Clean Global Footer Styling */
+        footer.insteph-global-footer {
+            background-color: var(--primary-dark);
+            color: #cbd5e1;
+            padding: 30px 5%;
+            margin-top: 50px;
+            border-top: 4px solid var(--brand-orange);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-copyright {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .footer-social-tray {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .social-node-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+        }
+        .social-node-link:hover {
+            transform: translateY(-2px);
+        }
+        .social-node-link.ig { background: #E1306C; }
+        .social-node-link.tt { background: #000000; border: 1px solid #333; }
+        .social-node-link.fb { background: #1877F2; }
+        .social-node-link.tw { background: #1DA1F2; }
+        .social-node-link.tch { background: #9146FF; }
+        .social-node-link.yt { background: #FF0000; }
+    </style>
+</head>
+<body>
+
+    <div class="top-promo-bar">
+        🔥 ANNIVERSARY CELEBRATIONS LIVE: GET UP TO 25% OFF PREMIUM SELECTIONS! STOCK RUNNING OUT FAST!
+    </div>
+
+    <header>
+        <div class="logo" onclick="resetSearchAndFilters()">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzCKN4QnzAy3LkJ2YdmvPcvUYvsMidEAacQXmxhkXlKQ&s" alt="INSTEPH.COM Logo">
+        </div>
+        <div class="search-container">
+            <input type="text" id="global-search-input" placeholder="Search products, brands and categories...">
+            <button type="button" onclick="executeCatalogSearch()">Search</button>
+        </div>
+        <nav>
+            <a onclick="switchPage('shop')" id="nav-shop" class="active">Shop Plaza</a>
+            <a onclick="switchPage('offers')" id="nav-offers">Hot Offers</a>
+            <a onclick="switchPage('claims')" id="nav-claims">Claims Center</a>
+            <a onclick="switchPage('admin')" id="nav-admin">Admin Portal</a>
+        </nav>
+        <div class="header-actions-tray">
+            <button type="button" class="theme-toggle-btn" onclick="cycleThemeBackground()">🎨 Change Background</button>
+            <div class="cart-trigger" onclick="switchPage('cart')">
+                🛒 Basket Tray (<span id="cart-count" style="color:var(--brand-orange); font-weight:900;">0</span>)
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section id="page-shop" class="page-section active">
+            
+            <div class="home-hero-layout">
+                <div class="category-sidebar">
+                    <div class="category-item active" id="cat-all" onclick="filterByCategory('All', this)">🌐 All Global Stocks</div>
+                    <div class="category-item" id="cat-apparel" onclick="filterByCategory('Apparel', this)">👔 Apparel & Garments</div>
+                    <div class="category-item" id="cat-footwear" onclick="filterByCategory('Footwear', this)">👟 Luxury Footwear</div>
+                    <div class="category-item" id="cat-electronics" onclick="filterByCategory('Electronics', this)">🔌 Household Tech</div>
+                    <div class="category-item" id="cat-supermarket" onclick="filterByCategory('Supermarket', this)">🥫 Supermarket Stock</div>
+                    <div class="category-item" id="cat-beauty" onclick="filterByCategory('Beauty', this)">💄 Health & Beauty</div>
+                    <div class="category-item" id="cat-baby" onclick="filterByCategory('Baby', this)">🍼 Baby Products</div>
+                </div>
+
+                <div class="hero-banner-slider">
+                    <div class="hero-text-content">
+                        <h1>Insteph Shopping Festival</h1>
+                        <p>Enjoy instant M-Pesa automated validation prompts paired with immediate logistics dispatch directly to your workspace node coordinates.</p>
+                        <button type="button" class="btn-accent" style="width:auto; padding:12px 28px;" onclick="switchPage('offers')">Explore Campaign Deals</button>
+                    </div>
+                    <div class="hero-image-showcase"></div>
+                </div>
+            </div>
+
+            <div class="quick-actions-strip">
+                <div class="action-badge-node" onclick="switchPage('offers')">
+                    <div class="circle-frame">💥</div>
+                    <div class="action-label">Clearance Sale</div>
+                </div>
+                <div class="action-badge-node" onclick="alert('Live Stream Session Initializing...')">
+                    <div class="circle-frame">📺</div>
+                    <div class="action-label">Live Deals</div>
+                </div>
+                <div class="action-badge-node" onclick="resetSearchAndFilters()">
+                    <div class="circle-frame">🌟</div>
+                    <div class="action-label">Official Stores</div>
+                </div>
+                <div class="action-badge-node" onclick="switchPage('claims')">
+                    <div class="circle-frame">🛡️</div>
+                    <div class="action-label">Secure Returns</div>
+                </div>
+            </div>
+
+            <div class="flash-sale-container" id="flash-sale-banner-wrap">
+                <div class="flash-sale-header">
+                    <div class="flash-title">⚡ Flash Sales | Live Now</div>
+                    <div class="live-timer-countdown">Time Left: <span id="flash-clock-display">03h : 07m : 40s</span></div>
+                </div>
+                <div class="product-grid" id="trends-grid"></div>
+            </div>
+
+            <h2 id="catalog-section-title" style="border-left: 5px solid var(--brand-orange); padding-left:12px; margin-bottom: 20px; font-size:22px; font-weight:800;">All Global Catalog Inventory</h2>
+            <div class="product-grid" id="shop-grid"></div>
+        </section>
+
+        <section id="page-offers" class="page-section">
+            <h2>Campaign Voucher Framework Matrix</h2>
+            <div class="voucher-container" style="margin-top:20px;">
+                <div class="voucher-card">
+                    <div class="voucher-value">Less KES 50/=</div>
+                    <div class="voucher-rule">Applied directly at settlement pipeline on purchases above KES 500/=!</div>
+                </div>
+                <div class="voucher-card green">
+                    <div class="voucher-value">Less KES 100/=</div>
+                    <div class="voucher-rule">Applied directly at settlement pipeline on purchases above KES 1000/=!</div>
+                </div>
+            </div>
+            <h3 style="margin-bottom:20px;">Promotional Campaign Item Grid</h3>
+            <div class="product-grid" id="offers-grid"></div>
+        </section>
+
+        <section id="page-cart" class="page-section">
+            <h2>Your Active Checkout Hub</h2>
+            <div class="checkout-layout" style="margin-top:20px;">
+                <div>
+                    <div class="card-panel">
+                        <h3 style="margin-bottom:15px; font-size:16px;">1. Confirm Selected Items</h3>
+                        <div id="cart-items-list"></div>
+                    </div>
+                    
+                    <div class="card-panel">
+                        <h3 style="margin-bottom:15px; font-size:16px;">2. Courier Routing Information</h3>
+                        <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">Fulfillment operations commence dispatch protocols immediately following API network clearance alerts.</p>
+                        <div class="form-group">
+                            <label>Physical Address / Office / Room / Town</label>
+                            <textarea id="checkout-address" rows="3" placeholder="Specify layout details for rider routing clear references..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Consignee Full Identity Name</label>
+                            <input type="text" id="checkout-name" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Safaricom Line Coordinate Node (For M-Pesa push prompts)</label>
+                            <input type="text" id="checkout-phone" placeholder="e.g. 0712345678">
+                            <span id="saved-phone-badge" style="display:none; font-size:12px; color:var(--mpesa-green); font-weight:bold; margin-top:6px;">✓ Active verified device configuration profile loaded.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card-panel">
+                        <h3 style="font-size:16px;">Settlement Matrix Metrics</h3>
+                        <div style="margin-top:20px;">
+                            <div class="summary-row"><span>Cart Subtotal:</span> <span id="sum-subtotal">KES 0.00</span></div>
+                            <div class="summary-row" style="color: var(--brand-pink-accent);"><span>Campaign Voucher Cuts:</span> <span id="sum-discount">- KES 0.00</span></div>
+                            <div class="summary-row"><span>Logistics Shipping Drop:</span> <span>KES 69.00</span></div>
+                            <div class="summary-row summary-total"><span>Grand Due Total:</span> <span id="sum-grand">KES 69.00</span></div>
+                        </div>
+                        <button onclick="triggerMpesaPayment()" class="btn-accent" style="margin-top: 20px; font-size: 15px; padding: 13px;">💳 Authorize via M-Pesa</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="post-purchase-review-zone" style="margin-top: 30px; display: none;">
+                <div class="card-panel" style="border: 1px solid var(--border-muted); border-top: 4px solid var(--mpesa-green); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                    <h3 style="color: var(--primary-dark); font-size: 18px; font-weight: 700; margin-bottom: 2px;">3. Instantly Sign-Off & Review Post-Delivery</h3>
+                    <p style="font-size: 13px; color: #4a5568; margin-bottom: 20px;">Once our courier service safely delivers your item package, verify receipt parameters directly below:</p>
+                    
+                    <div class="form-group">
+                        <label>Select Order Item to Sign Off</label>
+                        <select id="signoff-product-select"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Verification Snapshot Image</label>
+                        <input type="file" id="signoff-photo" accept="image/*" style="background: white; border: 1px solid var(--border-muted); padding: 8px;">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Rating Score</label>
+                        <select id="signoff-rating">
+                            <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+                            <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+                            <option value="3">⭐⭐⭐ 3 Stars</option>
+                            <option value="2">⭐⭐ 2 Stars</option>
+                            <option value="1">⭐ 1 Star</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Performance Review Comments</label>
+                        <textarea id="signoff-review" rows="4" placeholder="Tell other clients how the product handles or operates..."></textarea>
+                    </div>
+                    <button type="button" onclick="submitDeliverySignOff()" style="background: var(--mpesa-green); padding: 14px; font-size: 15px; border-radius: 8px; margin-top: 5px;">Confirm Delivery Sign-In & Upload</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-claims" class="page-section">
+            <h2>Grievances & Order Claim Registration</h2>
+            <div class="card-panel" style="max-width: 600px; margin-top: 20px;">
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">All registered operational disputes route straight into the management console dashboard matrix below for remediation parameters tracking.</p>
+                <div class="form-group">
+                    <label>Contact Email / Line Node Coordinates</label>
+                    <input type="text" id="claim-contact" placeholder="e.g. 0712345678">
+                </div>
+                <div class="form-group">
+                    <label>Resolution Action Request Type</label>
+                    <select id="claim-type">
+                        <option value="Refund">Full Financial Reversal (Refund)</option>
+                        <option value="Exchange">Defective Item Replacement Exchange</option>
+                        <option value="Return">Logistics Error System Return</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Detailed Fault Matrix Statement</label>
+                    <textarea id="claim-desc" rows="4" placeholder="Explain tracking irregularities or physical package conditions observed..."></textarea>
+                </div>
+                <button onclick="fileCustomerClaim()" class="btn-danger">Submit Claim to Operations Board</button>
+            </div>
+        </section>
+
+        <section id="page-admin" class="page-section">
+            <div id="admin-auth-panel" class="admin-lock-screen">
+                <h3 style="margin-bottom:10px; font-weight:800;">Secure Console Authentication</h3>
+                <p style="font-size:12px; color:#64748b; margin-bottom:20px; text-align:center;">Operational clearance parameters required to modify live production matrices.</p>
+                <div class="form-group" style="width:100%;">
+                    <label>Operator Code Name</label>
+                    <input type="text" id="admin-user-input" placeholder="USERNAME">
+                </div>
+                <div class="form-group" style="width:100%; margin-bottom:20px;">
+                    <label>Security Keyphrase Node</label>
+                    <input type="password" id="admin-pass-input" placeholder="PASSWORD">
+                </div>
+                <button type="button" class="btn-accent" onclick="authenticateAdminOperator()">Unlock Secure Node Dashboard</button>
+            </div>
+
+            <div id="admin-dashboard-panel" style="display:none;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h2>Operations Control & Inventory Dashboard</h2>
+                    <button style="width:auto; padding:8px 16px; background:#64748b;" onclick="logoutAdminOperator()">Lock Session</button>
+                </div>
+                <div class="admin-layout">
+                    <div class="card-panel">
+                        <h3 id="admin-form-title">Register New Stock Entity</h3>
+                        <input type="hidden" id="admin-product-idx" value="">
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label>Item Display Title String</label>
+                            <input type="text" id="admin-name" placeholder="Classic Leather Boots">
+                        </div>
+                        <div class="form-group">
+                            <label>Description Information Block</label>
+                            <textarea id="admin-desc" rows="3" placeholder="Premium materials profile styling..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Price Vector Unit Value (KES)</label>
+                            <input type="number" id="admin-price" placeholder="1200">
+                        </div>
+                        <div class="form-group">
+                            <label>System Catalog Categorization</label>
+                            <select id="admin-category">
+                                <option value="Apparel">Apparel & Garments</option>
+                                <option value="Footwear">Luxury Footwear</option>
+                                <option value="Electronics">Household Tech</option>
+                                <option value="Supermarket">Supermarket Stock</option>
+                                <option value="Beauty">Health & Beauty</option>
+                                <option value="Baby">Baby Products</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Promotional Placement Flag</label>
+                            <select id="admin-trend">
+                                <option value="Standard">Standard Grid Item</option>
+                                <option value="Trend">Assign to Live Flash Sale Node</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Item CDN Image Content Address Link</label>
+                            <input type="text" id="admin-image" placeholder="https://images.unsplash.com/...">
+                        </div>
+                        <button onclick="saveProductForm()" class="btn-accent" id="admin-save-btn">Commit Changes to Global Plaza</button>
+                        <button onclick="resetAdminForm()" style="margin-top: 10px; background: #64748b;">Clear Form Parameters</button>
+                    </div>
+
+                    <div>
+                        <div class="card-panel" style="border-top: 4px solid var(--brand-orange);">
+                            <h3>Global Background Workspace Styling Controls</h3>
+                            <p style="font-size: 12px; color:#64748b; margin-bottom: 15px;">Establish or restrict default baseline background parameters across all endpoint client layers instantly.</p>
+                            <div class="form-group">
+                                <label>Enforced Master Admin Background Color</label>
+                                <div style="display:flex; gap:10px; align-items:center;">
+                                    <input type="color" id="admin-bg-picker" value="#f4f6f9" style="width:50px; height:40px; padding:2px;">
+                                    <button type="button" onclick="commitAdminBackgroundOverride()" class="btn-accent" style="width:auto; padding:10px 20px;">Deploy Enforced Layout Color</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-panel">
+                            <h3>Active Inventory Control Stock Tracker</h3>
+                            <table id="admin-inventory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item Details</th>
+                                        <th>Category</th>
+                                        <th>Price Vector</th>
+                                        <th>Placement</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-panel">
+                            <h3>Client Shipments Operations Registry</h3>
+                            <table id="admin-clients-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Device Contact</th>
+                                        <th>Drop Destination</th>
+                                        <th>Fulfillment Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-panel">
+                            <h3>Active Escalated Claims Log Registry Matrix</h3>
+                            <table id="admin-claims-table">
+                                <thead>
+                                    <tr>
+                                        <th>Coordinate</th>
+                                        <th>Claim Class</th>
+                                        <th>Statement Notes</th>
+                                        <th>System Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="mpesa-modal" id="mpesa-gateway-window">
+        <div class="mpesa-box">
+            <div class="mpesa-logo">M-PESA</div>
+            <h3>Daraja Core API Gateway Linkup</h3>
+            <p style="font-size: 13px; color: #334155; margin-top: 10px;">
+                An interactive merchant request checkout prompt has been broadcasted for value: 
+                <strong id="mpesa-modal-amount" style="color: var(--mpesa-green);">KES 0.00</strong> to device coordinate <strong id="mpesa-modal-phone">07...</strong>
+            </p>
+            <div class="spinner"></div>
+            <p style="font-size: 11px; color: #64748b; font-style: italic;">Enter your Safaricom PIN validation parameters directly on your phone hardware screen when requested to conclude checkout streams securely...</p>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Interactive Anchor Node -->
+    <a href="https://wa.me/254700000000" target="_blank" class="whatsapp-floating-btn" title="Chat with Seller">
+        💬
+    </a>
+
+    <!-- Official Website Termination Footer Node -->
+    <footer class="insteph-global-footer">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                &copy; 2026 INSTEPH.COM. All Rights Reserved. Secure Commerce Pipelines.
+            </div>
+            <div class="footer-social-tray">
+                <a href="https://instagram.com" target="_blank" class="social-node-link ig">📸 Instagram</a>
+                <a href="https://tiktok.com" target="_blank" class="social-node-link tt">🎵 TikTok</a>
+                <a href="https://facebook.com" target="_blank" class="social-node-link fb">👥 Facebook</a>
+                <a href="https://twitter.com" target="_blank" class="social-node-link tw">🐦 Twitter</a>
+                <a href="https://twitch.tv" target="_blank" class="social-node-link tch">🎮 Twitch</a>
+                <a href="https://youtube.com" target="_blank" class="social-node-link yt">📺 YouTube</a>
+                <a href="https://linkedin.com/in/stephen-karim-892b8021b" target="_blank" class="social-node-link yt">LinkedIn</a>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        const initializedDefaultProducts = [];
+        const categoriesMap = {
+            Apparel: "👔 Apparel & Garments",
+            Footwear: "👟 Luxury Footwear",
+            Electronics: "🔌 Household Tech",
+            Supermarket: "🥫 Supermarket Stock",
+            Beauty: "💄 Health & Beauty",
+            Baby: "🍼 Baby Products"
+        };
+        
+        const seedDataTemplates = {
+            Apparel: [
+                { name: "Classic Slim Fit Khaki Chinos", price: 1200, img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500" },
+                { name: "Premium Egyptian Cotton Oxford Shirt", price: 1850, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500" },
+                { name: "Vintage Denim Jacket Raw Stitch", price: 2999, img: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=500" },
+                { name: "Waterproof Winter Windbreaker Shield", price: 3450, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500" },
+                { name: "Athletic Quick-Dry Training Hoodie", price: 1600, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500" }
+            ],
+            Footwear: [
+                { name: "Ergonomic Kinetic Smart Runner Alpha", price: 2400, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+                { name: "Handcrafted Premium Leather Brogues", price: 4500, img: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500" },
+                { name: "High-Top Suede Urban Desert Boots", price: 3800, img: "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=500" },
+                { name: "Slip-Resistant Trailing Hiking Shoes", price: 3200, img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500" },
+                { name: "Lightweight Cushioning Breathable Loafers", price: 1950, img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500" }
+            ],
+            Electronics: [
+                { name: "Wireless Silent Precision Office Mouse", price: 450, img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500" },
+                { name: "Noise-Cancelling High-Fidelity Headphones", price: 5500, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" },
+                { name: "Mechanical Tactile Backlit Keyboard", price: 3200, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" },
+                { name: "Ultra-Compact Dual Output Power Bank", price: 1800, img: "https://images.unsplash.com/photo-1609592424089-9860b7db0180?w=500" },
+                { name: "Smart Bluetooth Ambient Display Speaker", price: 2750, img: "https://images.unsplash.com/photo-1589003077984-894e133dabab?w=500" }
+            ],
+            Supermarket: [
+                { name: "Premium Long Grain Pure Basmati Rice", price: 340, img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500" },
+                { name: "Cold Pressed Extra Virgin Olive Oil", price: 1150, img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500" },
+                { name: "Organic Honey Roasted Granola Cluster", price: 580, img: "https://images.unsplash.com/photo-1517881917430-e70dfb3610aa?w=500" },
+                { name: "Fortified Multi-Grain Breakfast Oats Cereal", price: 420, img: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=500" },
+                { name: "Pure Highland Roasted Ground Coffee Blend", price: 650, img: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500" }
+            ],
+            Beauty: [
+                { name: "Hydrating Hyaluronic Acid Facial Serum", price: 1450, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500" },
+                { name: "Matte Finish Waterproof Liquid Foundation", price: 2100, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500" },
+                { name: "Natural Shea Butter Deep Repair Hair Mask", price: 950, img: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=500" },
+                { name: "Mineral UV Defense Shield SPF50 Sunscreen", price: 1750, img: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=500" },
+                { name: "Luxury Organic Botanical Essential Oils Set", price: 3200, img: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500" }
+            ],
+            Baby: [
+                { name: "Hypoallergenic Ultra-Soft Sensitive Wipes Pack", price: 380, img: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500" },
+                { name: "Ergonomic Comfort Multi-Position Baby Carrier", price: 3999, img: "https://images.unsplash.com/photo-1602417317202-b5e1974efbb4?w=500" },
+                { name: "Anti-Colic Premium Silicone Feeding Bottle", price: 850, img: "https://images.unsplash.com/photo-1522844990619-4951c40f3eda?w=500" },
+                { name: "Natural Oat Extract Tear-Free Baby Wash", price: 720, img: "https://images.unsplash.com/photo-1619551460773-4bd06b3a242c?w=500" },
+                { name: "Interlocking Non-Toxic Foam Playmat Geometric", price: 2450, img: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=500" }
+            ]
+        };
+
+        Object.keys(seedDataTemplates).forEach(catKey => {
+            const pool = seedDataTemplates[catKey];
+            for(let i = 1; i <= 20; i++) {
+                const template = pool[(i - 1) % pool.length];
+                initializedDefaultProducts.push({
+                    name: `${template.name} (Batch V${i})`,
+                    desc: `High quality production entity index node unit reference ${i} engineered for immediate retail distribution loops. Fully responsive validation setup framework included.`,
+                    price: template.price + (i * 15),
+                    category: catKey,
+                    trend: i <= 2 ? "Trend" : "Standard",
+                    rating: 4 + (i % 2),
+                    image: template.img,
+                    reviews: i === 1 ? [{user: "Duncan M.", text: "Performance levels conform gracefully to stated specification metrics."}] : []
+                });
+            }
+        });
+
+        const defaultClients = [
+            { name: "Erick Omwamba", contact: "0722114455", address: "Mombasa Rd, Gateway Mall Suite 3B", movement: "Dispatched via Rider" },
+            { name: "Mercy Chepngetich", contact: "0701889922", address: "Ngong Road, Greenhouse Apartment A4", movement: "Delivered & Client Signed" }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('insteph_products')) || initializedDefaultProducts;
+        let clients = JSON.parse(localStorage.getItem('insteph_clients')) || defaultClients;
+        let claims = JSON.parse(localStorage.getItem('insteph_claims')) || [];
+        let cart = [];
+        let purchasedItems = JSON.parse(localStorage.getItem('insteph_purchased_items')) || [];
+        
+        let currentActiveCategory = 'All';
+        let currentSearchQuery = '';
+
+        const themeBackgrounds = ['#f4f6f9', '#fdfbf7', '#f0f4f8', '#f0fdf4', '#fafafa'];
+        let currentBgIndex = 0;
+
+        function runLiveCountdownEngine() {
+            let totalSeconds = 3 * 3600 + 7 * 60 + 40;
+            setInterval(() => {
+                if (totalSeconds <= 0) totalSeconds = 4 * 3600;
+                totalSeconds--;
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                const clockStr = `${String(hours).padStart(2,'0')}h : ${String(minutes).padStart(2,'0')}m : ${String(seconds).padStart(2,'0')}s`;
+                const displayNode = document.getElementById('flash-clock-display');
+                if (displayNode) displayNode.innerText = clockStr;
+            }, 1000);
+        }
+
+        function synchronizeStorage() {
+            localStorage.setItem('insteph_products', JSON.stringify(products));
+            localStorage.setItem('insteph_clients', JSON.stringify(clients));
+            localStorage.setItem('insteph_claims', JSON.stringify(claims));
+            localStorage.setItem('insteph_purchased_items', JSON.stringify(purchasedItems));
+        }
+
+        function executeCatalogSearch() {
+            const queryInput = document.getElementById('global-search-input');
+            currentSearchQuery = queryInput.value.trim().toLowerCase();
+            switchPage('shop');
+            renderUserFacingProducts();
+            if (currentSearchQuery !== '') {
+                document.getElementById('catalog-section-title').innerText = `Search Query Results matching: "${queryInput.value}"`;
+                document.getElementById('flash-sale-banner-wrap').style.display = 'none';
+            }
+        }
+
+        function resetSearchAndFilters() {
+            document.getElementById('global-search-input').value = '';
+            currentSearchQuery = '';
+            currentActiveCategory = 'All';
+            document.querySelectorAll('.category-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('cat-all').classList.add('active');
+            document.getElementById('catalog-section-title').innerText = "All Global Catalog Inventory";
+            document.getElementById('flash-sale-banner-wrap').style.display = 'block';
+            switchPage('shop');
+            renderUserFacingProducts();
+        }
+
+        function filterByCategory(categoryName, elementRef) {
+            currentActiveCategory = categoryName;
+            currentSearchQuery = '';
+            document.getElementById('global-search-input').value = '';
+            document.querySelectorAll('.category-item').forEach(el => el.classList.remove('active'));
+            elementRef.classList.add('active');
+
+            if(categoryName === 'All') {
+                document.getElementById('catalog-section-title').innerText = "All Global Catalog Inventory";
+                document.getElementById('flash-sale-banner-wrap').style.display = 'block';
+            } else {
+                document.getElementById('catalog-section-title').innerText = `${categoriesMap[categoryName]} Showcase Node`;
+                document.getElementById('flash-sale-banner-wrap').style.display = 'none';
+            }
+            renderUserFacingProducts();
+        }
+
+        function switchPage(targetSection) {
+            document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(nav => nav.classList.remove('active'));
+            document.getElementById(`page-${targetSection}`).classList.add('active');
+            const navBtn = document.getElementById(`nav-${targetSection}`);
+            if (navBtn) navBtn.classList.add('active');
+
+            if (targetSection === 'shop' || targetSection === 'offers') renderUserFacingProducts();
+            if (targetSection === 'admin') checkAdminSessionState();
+            if (targetSection === 'cart') renderCartSystem();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderUserFacingProducts() {
+            const shopGrid = document.getElementById('shop-grid');
+            const offersGrid = document.getElementById('offers-grid');
+            const trendsGrid = document.getElementById('trends-grid');
+
+            if(shopGrid) shopGrid.innerHTML = '';
+            if(offersGrid) offersGrid.innerHTML = '';
+            if(trendsGrid) trendsGrid.innerHTML = '';
+
+            products.forEach((prod, idx) => {
+                const matchesCategory = (currentActiveCategory === 'All' || prod.category === currentActiveCategory);
+                const matchesSearch = (prod.name.toLowerCase().includes(currentSearchQuery) || prod.desc.toLowerCase().includes(currentSearchQuery));
+                if (!matchesCategory || !matchesSearch) return;
+
+                const stars = '★'.repeat(prod.rating || 5) + '☆'.repeat(5 - (prod.rating || 5));
+                let reviewsHTML = '';
+                if(prod.reviews && prod.reviews.length > 0) {
+                    reviewsHTML = `<div class="review-block"><strong>User Verifications:</strong><br>` + 
+                        prod.reviews.map(r => `<span class="review-user">${r.user}:</span> "${r.text}"`).join('<br>') + `</div>`;
+                }
+
+                const isSelected = cart.some(cartItem => cartItem.name === prod.name);
+                const activeImg = prod.image || "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80";
+                const dummyOldPrice = Math.ceil(prod.price * 1.4);
+
+                const cardMarkup = `
+                    <div class="product-card ${isSelected ? 'selected' : ''}">
+                        ${isSelected ? `<div class="selected-badge">In Basket ✓</div>` : ''}
+                        ${prod.trend === 'Trend' ? `<div class="trend-badge" style="${isSelected ? 'top:40px;' : ''}">-40% OFF</div>` : ''}
+                        <div class="prod-img-container">
+                            <img src="${activeImg}" class="prod-img" alt="${prod.name}" onerror="this.src='https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80'">
+                        </div>
+                        <div>
+                            <div class="prod-name" title="${prod.name}">${prod.name}</div>
+                            <div class="prod-desc">${prod.desc}</div>
+                            <div class="rating">${stars}</div>
+                            ${reviewsHTML}
+                        </div>
+                        <div style="margin-top:10px;">
+                            <div class="prod-price"><span class="discount-strike">KES ${dummyOldPrice}</span>KES ${parseFloat(prod.price).toFixed(2)}</div>
+                            ${isSelected ? 
+                                `<button class="btn-accent btn-selected-state">Added to Tray ✓</button>` : 
+                                `<button class="btn-accent" onclick="addItemToCart(${idx})">Buy Now</button>`
+                            }
+                        </div>
+                    </div>
+                `;
+
+                if(shopGrid) shopGrid.innerHTML += cardMarkup;
+                if(prod.trend === 'Trend' && trendsGrid && currentActiveCategory === 'All' && currentSearchQuery === '') trendsGrid.innerHTML += cardMarkup;
+                if(offersGrid && (idx % 3 === 0)) {
+                    if(offersGrid.children.length < 12) offersGrid.innerHTML += cardMarkup; 
+                }
+            });
+
+            if (shopGrid && shopGrid.children.length === 0) {
+                shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#64748b; font-style:italic;">No matching stock asset instances found for your current filtered requirements.</div>`;
+            }
+        }
+
+        function addItemToCart(index) {
+            cart.push(products[index]);
+            document.getElementById('cart-count').innerText = cart.length;
+            renderUserFacingProducts();
+        }
+
+        function renderCartSystem() {
+            const listElement = document.getElementById('cart-items-list');
+            listElement.innerHTML = '';
+
+            const savedPhone = localStorage.getItem('insteph_saved_phone');
+            const phoneInput = document.getElementById('checkout-phone');
+            const badge = document.getElementById('saved-phone-badge');
+            
+            if(savedPhone && phoneInput) {
+                phoneInput.value = savedPhone;
+                if(badge) badge.style.display = 'block';
+            } else if (badge) {
+                badge.style.display = 'none';
+            }
+
+            if (cart.length === 0) {
+                listElement.innerHTML = '<p style="color:#64748b; font-style:italic; padding: 10px 0;">Your shopping checkout tray is currently empty.</p>';
+                updateCheckoutMath(0);
+            } else {
+                let subtotal = 0;
+                cart.forEach((item, idx) => {
+                    subtotal += parseFloat(item.price);
+                    listElement.innerHTML += `
+                        <div class="cart-item">
+                            <div>
+                                <strong style="font-size:14px; color:var(--primary-dark);">${item.name}</strong><br>
+                                <span style="font-size:11px; color:#64748b; font-weight:bold; text-transform:uppercase;">${item.category}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:15px;">
+                                <strong style="font-size:15px;">KES ${parseFloat(item.price).toFixed(2)}</strong>
+                                <button class="btn-danger" style="padding:4px 8px; font-size:11px; width:auto;" onclick="removeCartItem(${idx})">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                updateCheckoutMath(subtotal);
+            }
+
+            const reviewZone = document.getElementById('post-purchase-review-zone');
+            const signoffSelect = document.getElementById('signoff-product-select');
+            if(purchasedItems.length > 0) {
+                reviewZone.style.display = 'block';
+                signoffSelect.innerHTML = purchasedItems.map(item => `<option value="${item.globalIndex}">${item.name}</option>`).join('');
+            } else {
+                reviewZone.style.display = 'none';
+            }
+        }
+
+        function removeCartItem(idx) {
+            cart.splice(idx, 1);
+            document.getElementById('cart-count').innerText = cart.length;
+            renderCartSystem();
+        }
+
+        function updateCheckoutMath(subtotal) {
+            let discount = 0;
+            if (subtotal >= 1000) discount = 100;
+            else if (subtotal >= 500) discount = 50;
+
+            const shippingFee = subtotal > 0 ? 69 : 0; 
+            const grandTotal = subtotal - discount + shippingFee;
+
+            document.getElementById('sum-subtotal').innerText = `KES ${subtotal.toFixed(2)}`;
+            document.getElementById('sum-discount').innerText = `- KES ${discount.toFixed(2)}`;
+            document.getElementById('sum-grand').innerText = `KES ${grandTotal.toFixed(2)}`;
+        }
+
+        function triggerMpesaPayment() {
+            if(cart.length === 0) return alert("Your cart buffer is empty. Add a valid entity node first.");
+            const address = document.getElementById('checkout-address').value;
+            const name = document.getElementById('checkout-name').value;
+            const phone = document.getElementById('checkout-phone').value;
+
+            if(!address || !name || !phone) {
+                return alert("Fulfillment validation error: All routing information inputs are mandatory.");
+            }
+
+            localStorage.setItem('insteph_saved_phone', phone);
+            const grandTotalText = document.getElementById('sum-grand').innerText;
+            const numericAmount = Math.ceil(parseFloat(grandTotalText.replace(/[^\d.]/g, '')));
+
+            document.getElementById('mpesa-modal-amount').innerText = `KES ${numericAmount}.00`;
+            document.getElementById('mpesa-modal-phone').innerText = phone;
+            const modal = document.getElementById('mpesa-gateway-window');
+            modal.style.display = 'flex';
+
+            fetch('http://localhost:3000/api/stkpush', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone: phone, amount: numericAmount })
+            })
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson ? await response.json() : null;
+                if (!response.ok) {
+                    const serverErrorDetail = data?.ResponseDescription || data?.message || `HTTP Server Status ${response.status}`;
+                    throw new Error(serverErrorDetail);
+                }
+                return data;
+            })
+            .then(data => {
+                modal.style.display = 'none';
+                if (data && (data.ResponseCode === "0" || data.MerchantRequestID)) {
+                    alert(`Safaricom STK API sequence triggered successfully! Input your M-Pesa pin code parameters.`);
+                    clients.push({ name, contact: phone, address, movement: "Dispatched via Express Courier" });
+                    cart.forEach(cartItem => {
+                        const globalIndex = products.findIndex(p => p.name === cartItem.name);
+                        if(!purchasedItems.some(p => p.name === cartItem.name)) {
+                            purchasedItems.push({ name: cartItem.name, globalIndex: globalIndex });
+                        }
+                    });
+                    cart = [];
+                    document.getElementById('cart-count').innerText = 0;
+                    synchronizeStorage();
+                    renderCartSystem(); 
+                } else {
+                    alert(`Safaricom Node Gateway Rejection: ${data?.ResponseDescription || 'Unknown processing response error state.'}`);
+                }
+            })
+            .catch(error => {
+                modal.style.display = 'none';
+                alert(`Safaricom Node Gateway Rejection: ${error.message || 'System connectivity lost or local network node rejected call.'}`);
+                console.error("Payment Execution Catch Logged:", error);
+            });
+        }
+
+        function submitDeliverySignOff() {
+            const prodIdx = document.getElementById('signoff-product-select').value;
+            const rating = parseInt(document.getElementById('signoff-rating').value);
+            const reviewText = document.getElementById('signoff-review').value;
+            const fileInput = document.getElementById('signoff-photo');
+
+            if(!reviewText || fileInput.files.length === 0) {
+                return alert("Verification criteria error: Please provide product comments and upload a clear package proof picture snapshot.");
+            }
+
+            if(products[prodIdx]) {
+                products[prodIdx].rating = rating;
+                if(!products[prodIdx].reviews) products[prodIdx].reviews = [];
+                products[prodIdx].reviews.push({ user: "Verified Buyer", text: reviewText });
+                
+                const currentItemName = products[prodIdx].name;
+                purchasedItems = purchasedItems.filter(item => item.name !== currentItemName);
+                alert("Fulfillment receipt signed off successfully! Experience telemetry metrics committed to live catalog arrays.");
+            }
+            synchronizeStorage();
+            document.getElementById('signoff-review').value = '';
+            fileInput.value = '';
+            renderCartSystem(); 
+        }
+
+        function fileCustomerClaim() {
+            const contact = document.getElementById('claim-contact').value;
+            const type = document.getElementById('claim-type').value;
+            const desc = document.getElementById('claim-desc').value;
+            if(!contact || !desc) return alert("Validation tracking structural failure.");
+            claims.push({ contact, type, desc, status: "Pending Evaluation" });
+            synchronizeStorage();
+            alert("Dispute framework entry registered successfully.");
+            document.getElementById('claim-desc').value = '';
+        }
+
+        function authenticateAdminOperator() {
+            const user = document.getElementById('admin-user-input').value.trim();
+            const pass = document.getElementById('admin-pass-input').value.trim();
+            if(user === "STEPHEN" && pass === "Stephen@12k") {
+                sessionStorage.setItem('insteph_admin_authenticated', 'true');
+                checkAdminSessionState();
+            } else {
+                alert("Access Denied: Invalid operator identification signature node.");
+            }
+        }
+
+        function checkAdminSessionState() {
+            const isAuth = sessionStorage.getItem('insteph_admin_authenticated');
+            if(isAuth === 'true') {
+                document.getElementById('admin-auth-panel').style.display = 'none';
+                document.getElementById('admin-dashboard-panel').style.display = 'block';
+                renderAdminViewPanels();
+            } else {
+                document.getElementById('admin-auth-panel').style.display = 'flex';
+                document.getElementById('admin-dashboard-panel').style.display = 'none';
+            }
+        }
+
+        function logoutAdminOperator() {
+            sessionStorage.removeItem('insteph_admin_authenticated');
+            document.getElementById('admin-user-input').value = '';
+            document.getElementById('admin-pass-input').value = '';
+            checkAdminSessionState();
+        }
+
+        function renderAdminViewPanels() {
+            const invBody = document.querySelector('#admin-inventory-table tbody');
+            if(!invBody) return;
+            invBody.innerHTML = '';
+            
+            products.forEach((prod, i) => {
+                invBody.innerHTML += `
+                    <tr>
+                        <td><strong>${prod.name}</strong></td>
+                        <td>${prod.category}</td>
+                        <td>KES ${parseFloat(prod.price).toFixed(2)}</td>
+                        <td><span style="color:${prod.trend === 'Trend' ? 'var(--brand-pink-accent)' : 'var(--brand-orange)'}; font-weight:bold;">${prod.trend}</span></td>
+                        <td>
+                            <button onclick="editProductFieldTrigger(${i})" style="padding:4px 8px; width:auto; font-size:11px; margin-right:5px; background:var(--primary-dark);">Edit</button>
+                            <button onclick="deleteProductField(${i})" style="padding:4px 8px; width:auto; font-size:11px; background:var(--brand-pink-accent);">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            const clientBody = document.querySelector('#admin-clients-table tbody');
+            clientBody.innerHTML = '';
+            clients.forEach(c => {
+                clientBody.innerHTML += `<tr><td><strong>${c.name}</strong></td><td>${c.contact}</td><td>${c.address}</td><td style="color:var(--mpesa-green); font-weight:bold;">${c.movement}</td></tr>`;
+            });
+
+            const claimsBody = document.querySelector('#admin-claims-table tbody');
+            claimsBody.innerHTML = '';
+            claims.forEach((claim, i) => {
+                claimsBody.innerHTML += `
+                    <tr>
+                        <td>${claim.contact}</td>
+                        <td><strong>${claim.type}</strong></td>
+                        <td>${claim.desc}</td>
+                        <td>
+                            <button onclick="resolveClaim(${i}, 'Resolved & Refunded')" style="padding:4px 8px; width:auto; font-size:11px; background:var(--mpesa-green);">${claim.status === 'Pending Evaluation' ? 'Approve Settlement' : claim.status}</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            const currentEnforcedBg = localStorage.getItem('insteph_admin_enforced_bg') || '#f4f6f9';
+            document.getElementById('admin-bg-picker').value = currentEnforcedBg;
+        }
+
+        function saveProductForm() {
+            const name = document.getElementById('admin-name').value;
+            const desc = document.getElementById('admin-desc').value;
+            const price = parseFloat(document.getElementById('admin-price').value);
+            const category = document.getElementById('admin-category').value;
+            const trend = document.getElementById('admin-trend').value;
+            const image = document.getElementById('admin-image').value;
+            const editIdx = document.getElementById('admin-product-idx').value;
+
+            if(!name || !desc || isNaN(price)) return alert("Data structures input validation mismatch.");
+
+            if(editIdx !== "") {
+                products[parseInt(editIdx)] = { ...products[parseInt(editIdx)], name, desc, price, category, trend, image };
+                alert("Stock definition tracks updated successfully!");
+            } else {
+                products.push({ name, desc, price, category, trend, image, rating: 5, reviews: [] });
+                alert("New entry instance injected to database matrix successfully!");
+            }
+            synchronizeStorage();
+            resetAdminForm();
+            renderAdminViewPanels();
+        }
+
+        function editProductFieldTrigger(i) {
+            const prod = products[i];
+            document.getElementById('admin-form-title').innerText = "Modify Stock Parameters Matrix";
+            document.getElementById('admin-product-idx').value = i;
+            document.getElementById('admin-name').value = prod.name;
+            document.getElementById('admin-desc').value = prod.desc;
+            document.getElementById('admin-price').value = prod.price;
+            document.getElementById('admin-category').value = prod.category;
+            document.getElementById('admin-trend').value = prod.trend;
+            document.getElementById('admin-image').value = prod.image || "";
+            document.getElementById('admin-save-btn').innerText = "Commit Update Matrix";
+        }
+
+        function deleteProductField(i) {
+            if(confirm("Purge asset definition completely out of the active data arrays?")) {
+                products.splice(i, 1);
+                synchronizeStorage();
+                renderAdminViewPanels();
+            }
+        }
+
+        function resolveClaim(i, resultStatus) {
+            claims[i].status = resultStatus;
+            synchronizeStorage();
+            renderAdminViewPanels();
+        }
+
+        function resetAdminForm() {
+            document.getElementById('admin-form-title').innerText = "Register New Stock Entity";
+            document.getElementById('admin-product-idx').value = "";
+            document.getElementById('admin-name').value = "";
+            document.getElementById('admin-desc').value = "";
+            document.getElementById('admin-price').value = "";
+            document.getElementById('admin-image').value = "";
+            document.getElementById('admin-save-btn').innerText = "Commit Changes to Global Plaza";
+        }
+
+        function cycleThemeBackground() {
+            currentBgIndex = (currentBgIndex + 1) % themeBackgrounds.length;
+            const targetedColor = themeBackgrounds[currentBgIndex];
+            
+            document.body.style.backgroundColor = targetedColor;
+            localStorage.setItem('insteph_user_selected_bg', targetedColor);
+        }
+
+        function commitAdminBackgroundOverride() {
+            const selectedColor = document.getElementById('admin-bg-picker').value;
+            localStorage.setItem('insteph_admin_enforced_bg', selectedColor);
+            document.body.style.backgroundColor = selectedColor;
+            alert(`Admin System Action: Master baseline color deployed to "${selectedColor}" successfully.`);
+        }
+
+        function initializeGlobalBackgroundFrameworks() {
+            const adminEnforcedColor = localStorage.getItem('insteph_admin_enforced_bg');
+            const userPreferenceColor = localStorage.getItem('insteph_user_selected_bg');
+            const finalizedActiveColor = userPreferenceColor || adminEnforcedColor || '#f4f6f9';
+            
+            document.body.style.backgroundColor = finalizedActiveColor;
+            
+            const existingIndex = themeBackgrounds.indexOf(finalizedActiveColor);
+            if (existingIndex !== -1) currentBgIndex = existingIndex;
+        }
+
+        document.getElementById('global-search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeCatalogSearch();
+            }
+        });
+
+        runLiveCountdownEngine();
+        renderUserFacingProducts();
+        initializeGlobalBackgroundFrameworks();
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINGSTEPH CRM</title>
+    <!-- Font Awesome for Social & WhatsApp Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Existing Layout Styles (Preserved) --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f6f9;
+        }
+
+        /* --- Restored Footer Styles --- */
+        footer {
+            background-color: #1e293b;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 10px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .footer-socials {
+            margin-bottom: 10px;
+        }
+
+        .footer-socials a {
+            color: #cbd5e1;
+            font-size: 18px;
+            margin: 0 12px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            color: #38bdf8; /* Accent color on hover */
+        }
+
+        .footer-rights {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* --- WhatsApp Chatbot Widget Styles --- */
+        .whatsapp-chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+        }
+
+        .whatsapp-launcher {
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-launcher:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            display: none; /* Hidden by default */
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chatbot-header {
+            background-color: #075E54;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-header i {
+            font-size: 24px;
+        }
+
+        .chatbot-header .bot-info h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .chatbot-header .bot-info p {
+            margin: 0;
+            font-size: 12px;
+            color: #d1f4cc;
+        }
+
+        .chatbot-body {
+            padding: 20px;
+            background-color: #e5ddd5; /* Classic WA background color */
+            max-height: 150px;
+        }
+
+        .chat-msg {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            font-size: 14px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .chatbot-footer {
+            padding: 15px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .start-chat-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .start-chat-btn:hover {
+            background-color: #128C7E;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- RESTORED FOOTER SECTION --- -->
+    <footer>
+        <div class="footer-socials">
+            <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footer-rights">
+            &copy; 2026 INSTEPH.COM. All Rights Reserved.
+        </div>
+    </footer>
+
+
+    <!-- --- WHATSAPP CHATBOT WIDGET --- -->
+    <div class="whatsapp-chatbot-container">
+        <!-- Floating Launcher Button -->
+        <div class="whatsapp-launcher" id="waLauncher" onclick="toggleChatWindow()">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+
+        <!-- Chat Window popup -->
+        <div class="chatbot-window" id="waChatWindow">
+            <div class="chatbot-header">
+                <i class="fab fa-whatsapp"></i>
+                <div class="bot-info">
+                    <h4>INSTEPH.COM Support</h4>
+                    <p>Typically replies instantly</p>
+                </div>
+            </div>
+            <div class="chatbot-body">
+                <div class="chat-msg">
+                    Hi there! 👋 How can we help you manage your CRM features today? Click below to start chatting with us.
+                </div>
+            </div>
+            <div class="chatbot-footer">
+                <!-- Replace '1234567890' with your actual WhatsApp business number -->
+                <a href="https://wa.me/1234567890?text=Hi,%20I%20need%20assistance%20with%20KINGSTEPH%20CRM" 
+                   target="_blank" 
+                   class="start-chat-btn">
+                    <i class="fab fa-whatsapp"></i> Start Chat
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- JAVASCRIPT FOR CHATBOT TOGGLE --- -->
+    <script>
+        function toggleChatWindow() {
+            const chatWindow = document.getElementById('waChatWindow');
+            if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+                chatWindow.style.display = 'block';
+            } else {
+                chatWindow.style.display = 'none';
+            }
+        }
+
+        // Close chat window if clicking outside the widget container
+        document.addEventListener('click', function(event) {
+            const container = document.querySelector('.whatsapp-chatbot-container');
+            const chatWindow = document.getElementById('waChatWindow');
+            if (!container.contains(event.target)) {
+                chatWindow.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
